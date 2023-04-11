@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.junmo.mapper.MemberMapper">
+
+    <insert id="saveMemberInfo" parameterType="com.shop.junmo.dto.MemberDTO">
+        INSERT INTO member(member_id, address, email, name, password)
+        VALUES ( #{member_id}, #{address}, #{email}, #{name}, #{password} )
+    </insert>
+
+    <select id="getAllMemberList" resultType="com.shop.junmo.dto.MemberDTO">
+        /* getAllMemberList*/
+        SELECT *
+          FROM member
+    </select>
+</mapper>

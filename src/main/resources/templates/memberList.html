@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>멤버</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="idx : ${list}">
+                <td th:text="${idx.member_id}"></td>
+                <td th:text="${idx.name}"></td>
+            </tr>
+        <tr>
+        </tr>
+        </tbody>
+    </table>
+
+
+</body>
+</html>
