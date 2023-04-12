@@ -16,8 +16,8 @@ public class MemberContoller {
     @Resource
     private MemberService memberService; // 호출 시 MemberServiceImpl이 딸려들어옴
 
-    @RequestMapping("/member/save")
-    public ModelAndView insertMember() {
+    @RequestMapping("/member/list")
+    public ModelAndView listMember() {
         ModelAndView mav = new ModelAndView();
 
         List<MemberDTO> list = memberService.getAllMemberList();
@@ -26,7 +26,14 @@ public class MemberContoller {
         mav.setViewName("memberList");
 
         return mav;
+    }
 
+    @RequestMapping("/member/save")
+    public ModelAndView insertMember() {
+
+//        memberService.saveMemberInfo();
+
+        return new ModelAndView("registMember");
     }
 
 }
