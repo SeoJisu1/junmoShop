@@ -5,8 +5,8 @@
 <mapper namespace="com.shop.junmo.mapper.MemberMapper">
 
     <insert id="saveMemberInfo" parameterType="com.shop.junmo.dto.MemberDTO">
-        INSERT INTO member(member_id, address, email, name, password)
-        VALUES ( #{member_id}, #{address}, #{email}, #{name}, #{password} )
+        INSERT INTO member(member_id, address, email, name, password, phone)
+        VALUES ( #{member_id}, #{address}, #{email}, #{name}, #{password}, #{phone} )
     </insert>
 
     <select id="getAllMemberList" resultType="com.shop.junmo.dto.MemberDTO">

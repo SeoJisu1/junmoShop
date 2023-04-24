@@ -1,9 +1,53 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <meta charset="UTF-8">
+    <link th:href="@{/css/regist.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/regist.js}"></script>
 </head>
 <body>
-    <h2>regist</h2>
+<th:block layout:fragment="content">
+    <div class="content">
+        <div style="text-align: center">
+            <h2 style="margin-bottom: 50px">회원가입</h2>
+            <div class="regist-box">
+                <form th:action="@{/member/write}" th:object="${memberDTO}" method="post">
+                    <div class="regist-divLine">
+                        <span class="sp-wid">아이디</span>
+                        <input type="text" id="rst_id" th:field="*{member_id}" maxlength="8">
+                        <input type="button" th:onclick="btn_duplication()" value="중복확인">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>비밀번호</span>
+                        <input type="password" id="rst_pass" th:field="*{password}">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>비밀번호 확인</span>
+                        <input type="password" id="rst_passChk">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>이름</span>
+                        <input type="text" id="rst_name" th:field="*{name}">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>이메일</span>
+                        <input type="text" id="rst_email" placeholder="예: moketkurly@naver.com" th:field="*{email}">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>휴대폰</span>
+                        <input type="number" id="rst_phone" placeholder="'-'없이 숫자만 입력" th:field="*{phone}">
+                    </div>
+                    <div class="regist-divLine">
+                        <span>주소</span>
+                        <input type="text" id="rst_addrs" th:field="*{address}">
+                        <input type="button" th:onclick="" value="주소검색">
+                    </div>
+                    <button type="submit" id="btn-save" th:onclick="return btn_save_onclick()">가입하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
 </body>
 </html>

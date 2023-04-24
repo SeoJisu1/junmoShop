@@ -2,13 +2,15 @@ package com.shop.junmo.controller;
 
 import com.shop.junmo.dto.MemberDTO;
 import com.shop.junmo.service.MemberService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MemberContoller {
@@ -28,12 +30,41 @@ public class MemberContoller {
         return mav;
     }
 
-    @RequestMapping("/member/save")
-    public ModelAndView insertMember() {
+    @GetMapping("/member/regist")
+    public ModelAndView registMember(Model model, MemberDTO memberDTO) {
 
-//        memberService.saveMemberInfo();
+        model.addAttribute("memberDTO", memberDTO);
 
         return new ModelAndView("registMember");
+    }
+
+    @PostMapping("/member/write")
+    public ModelAndView insertMember(@ModelAttribute("memberDTO") MemberDTO memberDTO) throws Exception {
+        String status = "";
+        String message = "";
+
+        ModelAndView mav = new ModelAndView("/");
+        
+        try {
+            if(memberDTO.getMember_id() != "") {
+                memberService.saveMemberInfo(memberDTO);
+
+            } else {
+                System.out.println("pk 오류");
+                status = "fail";
+            }
+
+        } catch (Exception e) {
+            status = "fail";
+            message = e.getMessage();
+        }
+
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("status", status);
+        res.put("message", message);
+        mav.addObject("result", res);
+
+        return mav;
     }
 
 }

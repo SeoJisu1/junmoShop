@@ -13,7 +13,7 @@ html,body {
     padding-bottom: 150px;
 }
 .content {
-    margin-top: 200px;
+    margin-top: 250px;
     padding-bottom: 150px;
 }
 
@@ -37,10 +37,13 @@ html,body {
 }
 
 .logo {
+    text-decoration: none;
     color: rgb(95, 0, 128);
     padding: 30px 20px 10px;
     font-size: 30px;
+    font-weight: bold;
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    display: inline-block;
 }
 
 .member-box {
