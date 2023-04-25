@@ -5,13 +5,20 @@
 <mapper namespace="com.shop.junmo.mapper.MemberMapper">
 
     <insert id="saveMemberInfo" parameterType="com.shop.junmo.dto.MemberDTO">
-        INSERT INTO member(member_id, address, email, name, password, phone)
-        VALUES ( #{member_id}, #{address}, #{email}, #{name}, #{password}, #{phone} )
+        INSERT INTO member(member_id, address, email, name, password, phone, registdt)
+        VALUES ( #{member_id}, #{address}, #{email}, #{name}, #{password}, #{phone}, SYSDATE() )
     </insert>
 
     <select id="getAllMemberList" resultType="com.shop.junmo.dto.MemberDTO">
         /* getAllMemberList*/
         SELECT *
           FROM member
+    </select>
+
+    <select id="memberIdDupl" resultType="int">
+        SELECT COUNT(0)
+          FROM MEMBER
+         WHERE 1=1
+           AND MEMBER_ID = #{member_id};
     </select>
 </mapper>

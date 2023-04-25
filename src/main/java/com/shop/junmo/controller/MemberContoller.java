@@ -43,10 +43,11 @@ public class MemberContoller {
         String status = "";
         String message = "";
 
-        ModelAndView mav = new ModelAndView("/");
+        ModelAndView mav = new ModelAndView("redirect:/");
         
         try {
             if(memberDTO.getMember_id() != "") {
+                memberDTO.setAddress(memberDTO.getAddress() + " " + memberDTO.getAddrsDetail());
                 memberService.saveMemberInfo(memberDTO);
 
             } else {
@@ -65,6 +66,14 @@ public class MemberContoller {
         mav.addObject("result", res);
 
         return mav;
+    }
+
+    @PostMapping("/member/duplication")
+    public int idDuplication(Model model, MemberDTO memberDTO) {
+        int result = memberService.memberIdDupl(memberDTO.getMember_id());
+        model.addAttribute("result", result);
+
+        return result;
     }
 
 }

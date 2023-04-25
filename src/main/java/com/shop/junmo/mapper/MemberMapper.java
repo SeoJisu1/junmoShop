@@ -16,4 +16,7 @@ public interface MemberMapper {
     // 멤버 리스트 전체 출력
     public List<MemberDTO> getAllMemberList();
 
+    // 아이디 중복확인
+    public int memberIdDupl(String member_id);
+
 }

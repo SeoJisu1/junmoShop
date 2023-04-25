@@ -1,8 +1,17 @@
+var idChk = false; // 아이디 중복확인용 변수
+
+// 가입하기 버튼 클릭
 function btn_save_onclick() {
     if(!validationCheck()) {
         return false;
     }
 
+    if(!idChk) {
+        alert("id 중복확인을 해 주세요");
+        return false;
+    }
+
+    alert("가입이 완료되었습니다.");
 }
 
 // 유효성 검사
@@ -57,16 +66,64 @@ function validationCheck() {
             return false;
         }    
     }
+
+    if(rst_pass.value != rst_passChk.value) {
+        alert("비밀번호를 다시 확인해주세요.");
+        return false;
+    }
     
     return true;
 }
 
-
+// 아이디 중복확인
 function btn_duplication() {
-    const pattern = new RegExp("^([\\w\\.\\_\\-])*[a-zA-Z0-9]+([\\w\\.\\_\\-])*([a-zA-Z0-9])+([\\w\\.\\_\\-])+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]{2,3}$");
-    var test = "hello@google.com";
-    console.log(test);
-    console.log(pattern.test(test));
+    var id = rst_id.value;
+
+    if(id == '') {
+        alert("id를 입력해주세요");
+        return false;
+    }
+
+    var memberDto = {
+        member_id : id
+    };
+
+    $.ajax({
+        url : "/member/duplication"
+       ,data : memberDto
+       ,type : "POST"
+    }).done(function(result) {
+        if(result == 1) {
+            alert("이미 존재하는 id 입니다.");
+            idChk = false;
+        } else if(result == 0) {
+            alert("사용 가능한 id 입니다.");
+            idChk = true;
+        }
+    });
 
 }
 
+// kakao api 주소검색
+function btn_addrsSearch() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            document.getElementById("rst_addrs").value = data.address;
+            $("#rst_addrsDetail").css("display", "");
+        }
+    }).open();
+}
+
+// 비밀번호 확인 문구 컨트롤
+function warningTxtControll(e) {
+   var txt = document.getElementsByClassName("sp_warningTxt")[0];
+
+   if(rst_pass.value != rst_passChk.value) {
+       txt.style.display="block";
+       txt.innerHTML = "*비밀번호가 일치하지 않습니다.";
+   } else {
+       txt.style.display="none";
+       txt.innerHTML = "";
+   }
+
+}

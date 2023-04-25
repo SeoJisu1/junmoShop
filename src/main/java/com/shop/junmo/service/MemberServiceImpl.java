@@ -27,4 +27,9 @@ public class MemberServiceImpl implements MemberService{
     public List<MemberDTO> getAllMemberList() {
         return memberMapper.getAllMemberList();
     }
+
+    @Override
+    public int memberIdDupl(String member_id) {
+        return memberMapper.memberIdDupl(member_id);
+    }
 }

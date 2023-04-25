@@ -6,6 +6,8 @@
     <link th:href="@{/css/regist.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/regist.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <th:block layout:fragment="content">
@@ -15,6 +17,11 @@
             <div class="regist-box">
                 <form th:action="@{/member/write}" th:object="${memberDTO}" method="post">
                     <table class="tb-con">
+                        <colgroup>
+                            <col width="160px" />
+                            <col width="400px" />
+                            <col width="180px" style="text-align: left" />
+                        </colgroup>
                         <tr>
                             <td><label>아이디</label></td>
                             <td><input type="text" id="rst_id" th:field="*{member_id}" maxlength="8"></td>
@@ -27,8 +34,10 @@
                         </tr>
                         <tr>
                             <td><label>비밀번호 확인</label></td>
-                            <td><input type="password" id="rst_passChk"></td>
-                            <td></td>
+                            <td>
+                                <input type="password" id="rst_passChk" th:onkeyup="warningTxtControll()">
+                            </td>
+                            <td><span class="sp_warningTxt"></span></td>
                         </tr>
                         <tr>
                             <td><label>이름</label></td>
@@ -47,8 +56,15 @@
                         </tr>
                         <tr>
                             <td><label>주소</label></td>
-                            <td><input type="text" id="rst_addrs" th:field="*{address}"></td>
-                            <td style="text-align: left"><input type="button" class="btn-violet" th:onclick="" value="주소검색"></td>
+                            <td>
+                                <input type="text" id="rst_addrs" th:field="*{address}"><br>
+                            </td>
+                            <td style="text-align: left"><input type="button" class="btn-violet" th:onclick="btn_addrsSearch()" value="주소검색"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="text" id="rst_addrsDetail" placeholder="상세주소 입력" style="display: none" th:field="*{addrsDetail}"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="3"><button class="btn-violet" type="submit" id="btn-save"
@@ -57,10 +73,12 @@
                             </td>
                         </tr>
                     </table>
-
                 </form>
             </div>
         </div>
+
+
+
     </div>
 </th:block>
 </body>
