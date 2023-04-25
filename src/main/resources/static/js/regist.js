@@ -82,6 +82,9 @@ function btn_duplication() {
     if(id == '') {
         alert("id를 입력해주세요");
         return false;
+    } else if(id.length < 5) {
+        alert("5~8자로 입력해주세요");
+        return false;
     }
 
     var memberDto = {

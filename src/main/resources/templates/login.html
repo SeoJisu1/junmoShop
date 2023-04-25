@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="~{fragments/layout}">
+<head>
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <div class="content">
+            <div style="text-align: center">
+                <h2 style="margin-bottom: 50px">로그인</h2>
+                <div class="login-box">
+                    <form th:action="@{/member/exeLogin.do}" th:object="${memberDTO}" method="post">
+
+                    </form>
+                </div>
+        </div>
+    </th:block>
+</body>
+</html>

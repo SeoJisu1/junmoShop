@@ -2,6 +2,7 @@ package com.shop.junmo.controller;
 
 import com.shop.junmo.dto.MemberDTO;
 import com.shop.junmo.service.MemberService;
+import com.shop.junmo.util.SHA256;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -47,11 +48,16 @@ public class MemberContoller {
         
         try {
             if(memberDTO.getMember_id() != "") {
+                SHA256 sha256 = new SHA256();
+                String crytogram = sha256.encrypt(memberDTO.getPassword());
+
+                memberDTO.setPassword(crytogram);
                 memberDTO.setAddress(memberDTO.getAddress() + " " + memberDTO.getAddrsDetail());
+
                 memberService.saveMemberInfo(memberDTO);
 
             } else {
-                System.out.println("pk 오류");
+                System.out.println("db 저장 오류");
                 status = "fail";
             }
 
@@ -74,6 +80,11 @@ public class MemberContoller {
         model.addAttribute("result", result);
 
         return result;
+    }
+
+    @RequestMapping("/member/login.do")
+    public ModelAndView loginPage() {
+        return new ModelAndView("login");
     }
 
 }

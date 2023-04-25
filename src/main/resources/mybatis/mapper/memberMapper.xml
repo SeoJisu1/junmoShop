@@ -21,4 +21,12 @@
          WHERE 1=1
            AND MEMBER_ID = #{member_id};
     </select>
+
+    <select id="memberLogin" resultType="String">
+        SELECT member_id, name
+          FROM MEMBER
+         WHERE 1=1
+           AND member_id = #{member_id}
+           AND password = #{password}
+    </select>
 </mapper>
