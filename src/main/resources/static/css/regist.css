@@ -1,25 +1,43 @@
 .regist-box {
     border-top: 2px solid black;
-    padding-top: 30px;
+    padding-top: 50px;
     width: 640px;
     margin: 0 auto
 }
-.regist-divLine {
-    width: 100%;
-    text-align: center;
-}
-.flt-left{
-    float: left;
-}
-.clr-both {
-    clear: both;
-}
-.sp-wid {
-    display: inline-block;
-    width: 150px;
-}
+
 
 #rst_id,#rst_pass,#rst_passChk,#rst_name,#rst_email,#rst_phone,#rst_addrs {
     padding: 5px;
     margin-bottom: 10px;
+    margin-top: 10px;
+    width: 200px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.tb-con {
+    width: 100%;
+}
+
+.btn-violet {
+    width: 90px;
+    height: 28px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    width: 90px;
+    height: 28px;
+    background-color: #8e8594;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-cancel > a {
+    color: white;
+    text-decoration: none;
 }
