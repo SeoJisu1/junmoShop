@@ -32,4 +32,13 @@ public class MemberServiceImpl implements MemberService{
     public int memberIdDupl(String member_id) {
         return memberMapper.memberIdDupl(member_id);
     }
+
+//    @Override
+//    public MemberDTO memberLogin(String member_id, String password) throws Exception {
+//        return memberMapper.memberLogin(member_id, password);
+//    }
+    @Override
+    public MemberDTO memberLogin(MemberDTO dto) throws Exception {
+        return memberMapper.memberLogin(dto);
+    }
 }

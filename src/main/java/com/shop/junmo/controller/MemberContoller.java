@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @RestController
 public class MemberContoller {
@@ -83,8 +86,38 @@ public class MemberContoller {
     }
 
     @RequestMapping("/member/login.do")
-    public ModelAndView loginPage() {
+    public ModelAndView loginPage(Model model, MemberDTO memberDTO) {
+        model.addAttribute("memberDTO", memberDTO);
         return new ModelAndView("login");
+    }
+
+    @PostMapping("/member/login/loginExe.do")
+    public ModelAndView loginExecute(@ModelAttribute("memberDTO") MemberDTO memberDTO,
+                                     Model model,
+                                     HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        SHA256 sha256 = new SHA256();
+
+        try {
+            // 비밀번호 암호화 비교
+            String crytogram = sha256.encrypt(memberDTO.getPassword());
+            memberDTO.setPassword(crytogram);
+
+            MemberDTO loginMember = memberService.memberLogin(memberDTO);
+
+            if(loginMember == null) {
+                System.out.println("아이디 또는 비밀번호 불일치");
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("loginMember", loginMember);
+                mav.setViewName("redirect:/");
+            }
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return mav;
     }
 
 }

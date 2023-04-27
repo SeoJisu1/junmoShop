@@ -16,8 +16,6 @@ function btn_save_onclick() {
 
 // 유효성 검사
 function validationCheck() {
-    console.log(rst_phone.value);
-    console.log(rst_phone.value.indexOf("-"));
     if(rst_id.value == "") {
         alert("아이디를 입력하세요");
         return false;
@@ -82,9 +80,12 @@ function btn_duplication() {
     if(id == '') {
         alert("id를 입력해주세요");
         return false;
-    } else if(id.length < 5) {
-        alert("5~8자로 입력해주세요");
-        return false;
+    } else {
+        const pattern = new RegExp("^[a-zA-Z][0-9a-zA-Z]{4,7}$");
+        if(!pattern.test(id)) {
+            alert("id는 영문+숫자 조합으로 5~8 글자만 입력해야합니다.");
+            return false;
+        }
     }
 
     var memberDto = {

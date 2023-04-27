@@ -18,5 +18,8 @@ public interface MemberMapper {
 
     // 아이디 중복확인
     public int memberIdDupl(String member_id);
+    
+    // 로그인
+    public MemberDTO memberLogin(MemberDTO dto) throws Exception;
 
 }

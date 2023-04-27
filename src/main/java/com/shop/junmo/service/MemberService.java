@@ -17,4 +17,6 @@ public interface MemberService {
     // 아이디 중복확인
     public int memberIdDupl(String member_id);
 
+    public MemberDTO memberLogin(MemberDTO dto) throws Exception;
+
 }

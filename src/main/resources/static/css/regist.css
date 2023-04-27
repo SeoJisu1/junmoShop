@@ -49,3 +49,52 @@
     color: white;
     text-decoration: none;
 }
+
+.btn-login {
+    width: 340px;
+    background-color: rgb(95, 0, 128);
+    padding: 0 10px;
+    overflow: hidden;
+    height: 54px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    border: none;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.btn-regi {
+    width: 340px;
+    padding: 0 10px;
+    height: 54px;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(95, 0, 128);
+    color: rgb(95, 0, 128);
+    cursor: pointer;
+}
+
+
+#lg_id, #lg_password {
+    width: 340px;
+    height: 46px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#lg_id:focus, #lg_password:focus {
+    border: 2px solid blueviolet;
+}
+
+#p_message {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
